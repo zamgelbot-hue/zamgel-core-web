@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Raleway:wght@300;400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-orbitron: "Orbitron", sans-serif;
+  --font-raleway: "Raleway", sans-serif;
+  --color-zam-bg: #0b0b0d;
+  --color-zam-silver: #c0c0c3;
+  --color-zam-orange: #ff7a00;
+  --color-zam-glow: #ffa133;
+  --color-zam-surface: #1a1a1d;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px;
+}
+
+body {
+  background-color: var(--color-zam-bg);
+  color: var(--color-zam-silver);
+  font-family: var(--font-raleway);
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-heading {
+  font-family: var(--font-orbitron);
+}
+
+.text-glow-orange {
+  text-shadow:
+    0 0 8px rgba(255, 122, 0, 0.45),
+    0 0 15px rgba(255, 122, 0, 0.25);
+}
+
+.box-glow-orange {
+  box-shadow:
+    0 0 15px rgba(255, 122, 0, 0.4),
+    inset 0 0 10px rgba(255, 122, 0, 0.2);
+}
+
+.glow-line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-zam-orange),
+    transparent
+  );
+}
+
+/* Custom scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-zam-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-zam-surface);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-zam-orange);
+}

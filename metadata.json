@@ -1,0 +1,8 @@
+{
+  "name": "Zamgel Core",
+  "description": "Premium futuristic landing page for a technology agency.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
