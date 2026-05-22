@@ -1,234 +1,174 @@
-// 📍 Ruta del archivo: src/components/ui/ContactModal.tsx
+// 📍 Ruta del archivo: src/components/contact/ContactModal.tsx
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { X, ArrowRight, ArrowLeft, Check } from "lucide-react";
+"use client";
 
-interface Props {
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Send } from "lucide-react";
+import { useEffect } from "react";
+
+interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const options = [
-  "Quiero una página web",
-  "Necesito un sistema para mi negocio",
-  "Quiero mejorar mi servicio digital",
-  "Necesito automatización o panel administrativo",
-  "Quiero orientación sobre mi proyecto",
-];
+export function ContactModal({ isOpen, onClose }: ContactModalProps) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
 
-const dynamicQuestions: Record<string, string[]> = {
-  "Quiero una página web": [
-    "¿Ya tienes dominio o nombre para tu sitio?",
-    "¿Tienes logo, colores o identidad visual?",
-    "¿Qué secciones necesitas? Ej: inicio, servicios, menú, contacto.",
-  ],
-  "Necesito un sistema para mi negocio": [
-    "¿Qué proceso quieres controlar o mejorar?",
-    "¿Necesitas manejar inventario, pedidos, clientes o reportes?",
-    "¿Quiénes usarían el sistema? Ej: dueño, empleados, clientes.",
-  ],
-  "Quiero mejorar mi servicio digital": [
-    "¿Ya tienes página, sistema o plataforma funcionando?",
-    "¿Qué problema principal quieres resolver?",
-    "¿Qué te gustaría mejorar primero?",
-  ],
-  "Necesito automatización o panel administrativo": [
-    "¿Qué tareas haces manualmente hoy?",
-    "¿Qué información necesitas administrar?",
-    "¿Necesitas usuarios, permisos o reportes?",
-  ],
-  "Quiero orientación sobre mi proyecto": [
-    "¿Cuál es la idea principal?",
-    "¿En qué etapa está el proyecto?",
-    "¿Qué te gustaría lograr primero?",
-  ],
-};
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
 
-export function ContactModal({ isOpen, onClose }: Props) {
-  const [step, setStep] = useState(1);
-  const [selected, setSelected] = useState("");
-
-  const handleClose = () => {
-    setStep(1);
-    setSelected("");
-    onClose();
-  };
-
-  const questions = selected ? dynamicQuestions[selected] : [];
+  if (!isOpen) return null;
 
   return (
     <AnimatePresence>
-      {isOpen && (
-        <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={handleClose}
-            className="fixed inset-0 bg-black/70 backdrop-blur-md z-[90]"
-          />
+      <motion.div
+        className="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 backdrop-blur-md px-4 py-6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        {/* BACKDROP */}
+        <div className="absolute inset-0" onClick={onClose} />
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 30 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center px-6"
-          >
-            <div className="relative w-full max-w-2xl rounded-3xl border border-white/10 bg-[#0B0B0D]/95 backdrop-blur-2xl p-8 md:p-10 overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,122,0,0.14),transparent_60%)] pointer-events-none" />
+        {/* MODAL */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96, y: 30 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.96, y: 20 }}
+          transition={{ duration: 0.25 }}
+          className="
+            relative
+            z-10
+            w-full
+            max-w-2xl
+            max-h-[90vh]
+            overflow-y-auto
+            rounded-[32px]
+            border
+            border-orange-500/20
+            bg-[#070707]
+            shadow-[0_0_80px_rgba(255,115,0,0.18)]
+          "
+        >
+          {/* GLOW */}
+          <div className="absolute inset-0 rounded-[32px] bg-[radial-gradient(circle_at_top,rgba(255,115,0,0.16),transparent_55%)] pointer-events-none" />
+
+          {/* HEADER */}
+          <div className="sticky top-0 z-20 flex items-center justify-between border-b border-white/5 bg-black/70 px-6 py-5 backdrop-blur-xl">
+            <div>
+              <p className="mb-2 text-xs uppercase tracking-[0.28em] text-orange-400">
+                Paso 1 de 2
+              </p>
+
+              <h2 className="text-3xl font-black tracking-tight text-white md:text-4xl">
+                Cuéntanos sobre tu proyecto.
+              </h2>
+
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-400 md:text-base">
+                Responde estos datos y revisaremos tu solicitud para darte una
+                orientación inicial.
+              </p>
+            </div>
+
+            <button
+              onClick={onClose}
+              className="
+                flex h-11 w-11 items-center justify-center
+                rounded-full border border-white/10
+                bg-white/5 text-zinc-300
+                transition-all duration-300
+                hover:border-orange-500/40
+                hover:bg-orange-500/10
+                hover:text-orange-400
+              "
+            >
+              <X size={18} />
+            </button>
+          </div>
+
+          {/* CONTENT */}
+          <div className="relative px-6 py-6 md:px-8 md:py-8">
+            <div className="mb-6 rounded-2xl border border-orange-500/20 bg-orange-500/10 px-5 py-4 text-sm text-orange-300">
+              Solicitud: Necesito un sistema para mi negocio
+            </div>
+
+            <form className="space-y-5">
+              <Input placeholder="Tu nombre" />
+              <Input placeholder="Negocio o marca" />
+              <Input placeholder="Correo o teléfono" />
+
+              <Textarea placeholder="¿Qué proceso quieres controlar o mejorar?" />
+
+              <Textarea placeholder="¿Necesitas manejar inventario, pedidos, clientes o reportes?" />
+
+              <Textarea placeholder="¿Quiénes usarían el sistema? Ej: dueño, empleados, clientes." />
+
+              <Textarea placeholder="Detalles extra que quieras agregar" />
 
               <button
-                onClick={handleClose}
-                className="absolute top-5 right-5 w-11 h-11 rounded-full border border-white/10 bg-white/[0.03] flex items-center justify-center text-zinc-400 hover:text-white transition-colors duration-300"
+                type="submit"
+                className="
+                  mt-4 flex w-full items-center justify-center gap-3
+                  rounded-2xl bg-orange-500 px-6 py-4
+                  text-sm font-bold uppercase tracking-[0.2em]
+                  text-black transition-all duration-300
+                  hover:scale-[1.01]
+                  hover:bg-orange-400
+                  hover:shadow-[0_0_40px_rgba(255,115,0,0.45)]
+                "
               >
-                <X className="w-5 h-5" />
+                Enviar solicitud
+                <Send size={16} />
               </button>
-
-              <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="h-1 flex-1 rounded-full bg-zam-orange" />
-                  <div
-                    className={`h-1 flex-1 rounded-full ${
-                      step === 2 ? "bg-zam-orange" : "bg-white/10"
-                    }`}
-                  />
-                </div>
-
-                {step === 1 && (
-                  <>
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zam-orange/20 bg-zam-orange/5 mb-6">
-                      <div className="w-2 h-2 rounded-full bg-zam-orange" />
-                      <span className="text-xs tracking-[0.2em] uppercase text-zam-orange">
-                        Paso 1 de 2
-                      </span>
-                    </div>
-
-                    <h2 className="font-heading text-4xl text-white leading-[1.05] mb-5">
-                      ¿Qué estás buscando construir?
-                    </h2>
-
-                    <p className="text-zinc-400 leading-relaxed mb-8">
-                      Selecciona la opción que mejor se acerque a lo que
-                      necesitas.
-                    </p>
-
-                    <div className="space-y-4 mb-8">
-                      {options.map((option) => {
-                        const isActive = selected === option;
-
-                        return (
-                          <button
-                            key={option}
-                            type="button"
-                            onClick={() => setSelected(option)}
-                            className={`w-full text-left rounded-2xl border px-6 py-5 transition-all duration-300 flex items-center justify-between gap-4 ${
-                              isActive
-                                ? "border-zam-orange/50 bg-zam-orange/[0.08] text-white"
-                                : "border-white/5 bg-white/[0.03] text-zinc-300 hover:border-zam-orange/30 hover:bg-zam-orange/[0.04]"
-                            }`}
-                          >
-                            <span>{option}</span>
-
-                            {isActive && (
-                              <Check className="w-5 h-5 text-zam-orange" />
-                            )}
-                          </button>
-                        );
-                      })}
-                    </div>
-
-                    <button
-                      type="button"
-                      disabled={!selected}
-                      onClick={() => setStep(2)}
-                      className="w-full rounded-2xl bg-zam-orange px-8 py-5 text-black font-bold tracking-[0.16em] uppercase disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-3 hover:shadow-[0_0_30px_rgba(255,122,0,0.3)] transition-all duration-300"
-                    >
-                      Continuar
-                      <ArrowRight className="w-5 h-5" />
-                    </button>
-                  </>
-                )}
-
-                {step === 2 && (
-                  <>
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zam-orange/20 bg-zam-orange/5 mb-6">
-                      <div className="w-2 h-2 rounded-full bg-zam-orange" />
-                      <span className="text-xs tracking-[0.2em] uppercase text-zam-orange">
-                        Paso 2 de 2
-                      </span>
-                    </div>
-
-                    <h2 className="font-heading text-4xl text-white leading-[1.05] mb-5">
-                      Cuéntanos sobre tu proyecto.
-                    </h2>
-
-                    <p className="text-zinc-400 leading-relaxed mb-8">
-                      Responde estos datos y revisaremos tu solicitud para darte
-                      una orientación inicial.
-                    </p>
-
-                    <div className="mb-6 rounded-2xl border border-zam-orange/20 bg-zam-orange/[0.05] px-5 py-4 text-sm text-zam-orange">
-                      Solicitud: {selected}
-                    </div>
-
-                    <div className="space-y-4">
-                      <input
-                        placeholder="Tu nombre"
-                        className="w-full rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 text-white outline-none focus:border-zam-orange/50"
-                      />
-
-                      <input
-                        placeholder="Negocio o marca"
-                        className="w-full rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 text-white outline-none focus:border-zam-orange/50"
-                      />
-
-                      <input
-                        placeholder="Correo o teléfono"
-                        className="w-full rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 text-white outline-none focus:border-zam-orange/50"
-                      />
-
-                      {questions.map((question) => (
-                        <textarea
-                          key={question}
-                          placeholder={question}
-                          rows={2}
-                          className="w-full rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 text-white outline-none resize-none focus:border-zam-orange/50"
-                        />
-                      ))}
-
-                      <textarea
-                        placeholder="Detalles extra que quieras agregar"
-                        rows={3}
-                        className="w-full rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 text-white outline-none resize-none focus:border-zam-orange/50"
-                      />
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                      <button
-                        type="button"
-                        onClick={() => setStep(1)}
-                        className="rounded-2xl border border-white/10 px-6 py-4 text-zinc-300 hover:text-white transition-colors duration-300 flex items-center justify-center gap-2"
-                      >
-                        <ArrowLeft className="w-4 h-4" />
-                        Volver
-                      </button>
-
-                      <button
-                        type="button"
-                        className="flex-1 rounded-2xl bg-zam-orange px-8 py-4 text-black font-bold tracking-[0.16em] uppercase hover:shadow-[0_0_30px_rgba(255,122,0,0.3)] transition-all duration-300"
-                      >
-                        Enviar a ventas@zamgelcore.com
-                      </button>
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-          </motion.div>
-        </>
-      )}
+            </form>
+          </div>
+        </motion.div>
+      </motion.div>
     </AnimatePresence>
+  );
+}
+
+function Input({ placeholder }: { placeholder: string }) {
+  return (
+    <input
+      placeholder={placeholder}
+      className="
+        w-full rounded-2xl border border-white/10
+        bg-white/[0.03]
+        px-5 py-4
+        text-white placeholder:text-zinc-500
+        outline-none transition-all duration-300
+        focus:border-orange-500/40
+        focus:bg-orange-500/[0.03]
+        focus:ring-2 focus:ring-orange-500/10
+      "
+    />
+  );
+}
+
+function Textarea({ placeholder }: { placeholder: string }) {
+  return (
+    <textarea
+      rows={4}
+      placeholder={placeholder}
+      className="
+        w-full resize-none rounded-2xl
+        border border-white/10
+        bg-white/[0.03]
+        px-5 py-4
+        text-white placeholder:text-zinc-500
+        outline-none transition-all duration-300
+        focus:border-orange-500/40
+        focus:bg-orange-500/[0.03]
+        focus:ring-2 focus:ring-orange-500/10
+      "
+    />
   );
 }

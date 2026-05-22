@@ -16,9 +16,8 @@ import {
   ShoppingCart,
   Sparkles,
   Trophy,
-  Users,
+  Tv,
   Utensils,
-  Zap,
 } from "lucide-react";
 
 const velasquezHighlights = [
@@ -39,30 +38,13 @@ const lmfHighlights = [
   "Arquitectura preparada para agregar más juegos",
 ];
 
-const compactProjects = [
-  {
-    icon: MonitorPlay,
-    name: "Santiel TV",
-    url: "https://santieltv.com",
-    type: "Landing + portal",
-    status: "Sistema comercial",
-    description:
-      "Landing page premium para publicitar un negocio de streaming digital, con portal de clientes, panel administrativo y estructura comercial enfocada en conversión.",
-    solved: [
-      "Landing moderna para promocionar servicios",
-      "Portal de clientes con acceso privado",
-      "Panel administrativo para usuarios",
-      "Branding visual premium",
-      "Base para ecosistema web + apps",
-    ],
-    metrics: [
-      { label: "Objetivo", value: "Conversión" },
-      { label: "Sistema", value: "Portal + Admin" },
-      { label: "Marca", value: "Premium" },
-    ],
-    tags: ["React", "Netlify", "Supabase", "Admin", "Landing"],
-    accent: "from-yellow-500/20 via-orange-500/10 to-transparent",
-  },
+const santielHighlights = [
+  "Landing premium enfocada en conversión",
+  "Catálogo, planes, compatibilidad y soporte comercial",
+  "Portal de clientes con acceso privado",
+  "Panel super admin para gestionar usuarios",
+  "Sistema de planes, demos, vencimientos y bloqueos",
+  "Base preparada para ecosistema web + apps",
 ];
 
 const capabilities = [
@@ -121,11 +103,84 @@ const processSteps = [
   },
 ];
 
+function BrowserDots({ label }: { label: string }) {
+  return (
+    <div className="mb-3 flex items-center gap-2 px-2">
+      <span className="h-3 w-3 rounded-full bg-red-500" />
+      <span className="h-3 w-3 rounded-full bg-yellow-500" />
+      <span className="h-3 w-3 rounded-full bg-green-500" />
+      <span className="ml-3 truncate text-xs text-zinc-500">{label}</span>
+    </div>
+  );
+}
+
+function StatPill({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-black/35 p-4">
+      <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+        {label}
+      </p>
+      <p className="mt-2 text-sm font-black text-white">{value}</p>
+    </div>
+  );
+}
+
+function Tag({ children }: { children: string }) {
+  return (
+    <span className="rounded-full border border-white/10 bg-black/35 px-3 py-1 text-xs text-zinc-400">
+      {children}
+    </span>
+  );
+}
+
+function PrimaryProjectButton({ href }: { href: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="inline-flex items-center justify-center gap-3 rounded-full border border-zam-orange/30 bg-zam-orange/10 px-6 py-4 text-xs font-black uppercase tracking-[0.18em] text-zam-orange transition hover:bg-zam-orange hover:text-black hover:shadow-[0_0_32px_rgba(255,122,0,0.25)]"
+    >
+      Ver proyecto
+      <ArrowUpRight className="h-4 w-4" />
+    </a>
+  );
+}
+
+function PlansButton() {
+  return (
+    <a
+      href="/#planes"
+      className="inline-flex items-center justify-center gap-3 rounded-full border border-white/10 bg-white px-6 py-4 text-xs font-black uppercase tracking-[0.18em] text-black transition hover:bg-zam-orange"
+    >
+      Ver planes
+      <ArrowRight className="h-4 w-4" />
+    </a>
+  );
+}
+
+function HighlightsList({ items }: { items: string[] }) {
+  return (
+    <div className="mt-7 space-y-3 lg:mt-8">
+      <p className="text-xs font-black uppercase tracking-[0.22em] text-zinc-500">
+        Qué resolvimos
+      </p>
+
+      {items.map((item) => (
+        <div key={item} className="flex gap-3 text-sm text-zinc-300">
+          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-zam-orange" />
+          <span>{item}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function Projects() {
   return (
     <section
       id="proyectos"
-      className="relative overflow-hidden border-t border-white/5 px-6 py-28"
+      className="relative overflow-hidden border-t border-white/5 px-4 py-20 sm:px-6 lg:py-28"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,122,0,0.12),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.06),transparent_32%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:56px_56px] opacity-50" />
@@ -136,90 +191,66 @@ export function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55 }}
           viewport={{ once: true }}
-          className="mb-16 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end"
+          className="mb-10 grid gap-6 lg:mb-16 lg:grid-cols-[0.95fr_1.05fr] lg:items-end"
         >
           <div>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-zam-orange/20 bg-zam-orange/5 px-5 py-2">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-zam-orange/20 bg-zam-orange/5 px-4 py-2 sm:px-5">
               <Sparkles className="h-4 w-4 text-zam-orange" />
-              <span className="text-sm uppercase tracking-[0.2em] text-zam-orange">
+              <span className="text-xs uppercase tracking-[0.2em] text-zam-orange sm:text-sm">
                 Casos reales
               </span>
             </div>
 
-            <h2 className="max-w-4xl font-heading text-4xl leading-[1.06] text-white lg:text-6xl">
+            <h2 className="max-w-4xl font-heading text-3xl leading-[1.06] text-white sm:text-4xl lg:text-6xl">
               Proyectos que convierten una idea en un sistema real.
             </h2>
           </div>
 
-          <p className="max-w-3xl text-lg leading-relaxed text-zinc-400 lg:ml-auto">
+          <p className="max-w-3xl text-sm leading-7 text-zinc-400 sm:text-lg lg:ml-auto">
             Zamgel Core no solo diseña páginas bonitas. Construimos presencia
             digital, paneles, herramientas internas y plataformas que ayudan a
             negocios reales a operar mejor.
           </p>
         </motion.div>
 
+        {/* VELÁZQUEZ FOOD TRUCK */}
         <motion.article
           initial={{ opacity: 0, y: 34 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65 }}
           viewport={{ once: true }}
-          className="group relative mb-10 overflow-hidden rounded-[2.2rem] border border-zam-orange/25 bg-black/55 p-5 shadow-[0_0_70px_rgba(255,90,0,0.12)] backdrop-blur-xl md:p-8 lg:p-10"
+          className="group relative mb-7 overflow-hidden rounded-[1.7rem] border border-zam-orange/25 bg-black/55 p-5 shadow-[0_0_70px_rgba(255,90,0,0.12)] backdrop-blur-xl md:p-8 lg:mb-8 lg:rounded-[2.2rem] lg:p-10"
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,60,0,0.22),transparent_34%),radial-gradient(circle_at_82%_35%,rgba(255,122,0,0.18),transparent_30%)]" />
           <div className="absolute -right-28 -top-28 h-80 w-80 rounded-full bg-zam-orange/20 blur-3xl transition duration-700 group-hover:bg-zam-orange/30" />
           <div className="absolute -bottom-28 left-10 h-72 w-72 rounded-full bg-red-600/15 blur-3xl" />
 
-          <div className="relative grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
+          <div className="relative grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:gap-10">
             <div>
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-zam-orange/25 bg-zam-orange/10 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-zam-orange">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-zam-orange/25 bg-zam-orange/10 px-4 py-2 text-[10px] font-black uppercase tracking-[0.22em] text-zam-orange sm:text-xs">
                 <Utensils className="h-4 w-4" />
                 Caso destacado
               </div>
 
-              <h3 className="font-heading text-4xl leading-tight text-white md:text-5xl">
+              <h3 className="font-heading text-3xl leading-tight text-white sm:text-4xl md:text-5xl">
                 Velázquez Food Truck
               </h3>
 
-              <p className="mt-5 text-lg leading-8 text-zinc-300">
+              <p className="mt-5 text-sm leading-7 text-zinc-300 sm:text-lg sm:leading-8">
                 Sistema web moderno para un food truck real en Houston:
-                presencia digital, menú, ubicación, experiencia móvil y una
-                base operativa con POS para tomar órdenes.
+                presencia digital, menú, ubicación, experiencia móvil y una base
+                operativa con POS para tomar órdenes.
               </p>
 
-              <div className="mt-7 grid gap-3 sm:grid-cols-3">
-                {[
-                  { label: "Enfoque", value: "Ventas + operación" },
-                  { label: "Cliente", value: "Negocio local" },
-                  { label: "Sistema", value: "Web + POS" },
-                ].map((item) => (
-                  <div
-                    key={item.label}
-                    className="rounded-2xl border border-white/10 bg-black/35 p-4"
-                  >
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
-                      {item.label}
-                    </p>
-                    <p className="mt-2 text-sm font-black text-white">
-                      {item.value}
-                    </p>
-                  </div>
-                ))}
+              <div className="mt-6 grid gap-3 sm:grid-cols-3 lg:mt-7">
+                <StatPill label="Enfoque" value="Ventas + operación" />
+                <StatPill label="Cliente" value="Negocio local" />
+                <StatPill label="Sistema" value="Web + POS" />
               </div>
 
-              <div className="mt-8 space-y-3">
-                <p className="text-xs font-black uppercase tracking-[0.22em] text-zinc-500">
-                  Qué resolvimos
-                </p>
+              <HighlightsList items={velasquezHighlights} />
 
-                {velasquezHighlights.map((item) => (
-                  <div key={item} className="flex gap-3 text-sm text-zinc-300">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-zam-orange" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-2">
+              <div className="mt-7 flex flex-wrap gap-2 lg:mt-8">
                 {[
                   "React",
                   "Supabase",
@@ -228,58 +259,30 @@ export function Projects() {
                   "QR",
                   "Mobile UX",
                 ].map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-white/10 bg-black/35 px-3 py-1 text-xs text-zinc-400"
-                  >
-                    {tag}
-                  </span>
+                  <Tag key={tag}>{tag}</Tag>
                 ))}
               </div>
 
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href="https://velasquezfoodtruck.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-3 rounded-full border border-zam-orange/40 bg-zam-orange/10 px-6 py-4 text-xs font-black uppercase tracking-[0.18em] text-zam-orange transition hover:bg-zam-orange hover:text-black hover:shadow-[0_0_34px_rgba(255,122,0,0.3)]"
-                >
-                  Ver proyecto
-                  <ArrowUpRight className="h-4 w-4" />
-                </a>
-
-                <a
-                  href="/#planes"
-                  className="inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-4 text-xs font-black uppercase tracking-[0.18em] text-black transition hover:bg-zam-orange"
-                >
-                  Ver planes
-                  <ArrowRight className="h-4 w-4" />
-                </a>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-9">
+                <PrimaryProjectButton href="https://velasquezfoodtruck.com" />
+                <PlansButton />
               </div>
             </div>
 
-            <div className="relative min-h-[34rem] lg:min-h-[39rem]">
+            <div className="relative lg:min-h-[39rem]">
               <div className="absolute -left-6 top-4 hidden h-40 w-40 rounded-full bg-red-600/20 blur-3xl md:block" />
-              <div className="absolute right-8 top-10 h-52 w-52 rounded-full bg-zam-orange/20 blur-3xl" />
+              <div className="absolute right-8 top-10 hidden h-52 w-52 rounded-full bg-zam-orange/20 blur-3xl md:block" />
 
               <div className="relative mx-auto max-w-4xl rounded-[1.7rem] border border-white/10 bg-[#070707] p-3 shadow-2xl">
-                <div className="mb-3 flex items-center gap-2 px-2">
-                  <span className="h-3 w-3 rounded-full bg-red-500" />
-                  <span className="h-3 w-3 rounded-full bg-yellow-500" />
-                  <span className="h-3 w-3 rounded-full bg-green-500" />
-                  <span className="ml-3 text-xs text-zinc-500">
-                    velasquezfoodtruck.com
-                  </span>
-                </div>
-
+                <BrowserDots label="velasquezfoodtruck.com" />
                 <img
                   src="/showcase/velasquez/vft_home.png"
                   alt="Velázquez Food Truck landing page"
-                  className="h-full w-full rounded-[1.25rem] border border-white/5 object-cover"
+                  className="w-full rounded-[1.25rem] border border-white/5 object-cover"
                 />
               </div>
 
-              <div className="absolute bottom-4 left-2 max-w-[30rem] rounded-[1.25rem] border border-zam-orange/20 bg-black/75 p-3 shadow-[0_0_45px_rgba(255,122,0,0.18)] backdrop-blur-xl md:left-8 md:w-[45%]">
+              <div className="hidden md:absolute md:bottom-4 md:left-8 md:block md:w-[45%] md:max-w-[30rem] md:rounded-[1.25rem] md:border md:border-zam-orange/20 md:bg-black/75 md:p-3 md:shadow-[0_0_45px_rgba(255,122,0,0.18)] md:backdrop-blur-xl">
                 <div className="mb-3 flex items-center justify-between">
                   <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-zam-orange">
                     <ShoppingCart className="h-4 w-4" />
@@ -299,8 +302,12 @@ export function Projects() {
               <motion.div
                 initial={{ y: 0 }}
                 animate={{ y: [-7, 7, -7] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute bottom-2 right-2 w-[11rem] overflow-hidden rounded-[1.8rem] border border-white/10 bg-black p-2 shadow-[0_0_60px_rgba(255,90,0,0.22)] md:bottom-6 md:right-8 md:w-[13rem] lg:w-[15rem]"
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="hidden overflow-hidden rounded-[1.8rem] border border-white/10 bg-black p-2 shadow-[0_0_60px_rgba(255,90,0,0.22)] md:absolute md:bottom-6 md:right-8 md:block md:w-[13rem] lg:w-[15rem]"
               >
                 <img
                   src="/showcase/velasquez/movil_home.jpeg"
@@ -312,38 +319,31 @@ export function Projects() {
           </div>
         </motion.article>
 
+        {/* LA MESA FAMILIAR */}
         <motion.article
           initial={{ opacity: 0, y: 34 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65 }}
           viewport={{ once: true }}
-          className="group relative mb-10 overflow-hidden rounded-[2.2rem] border border-orange-400/20 bg-black/55 p-5 shadow-[0_0_70px_rgba(255,122,0,0.10)] backdrop-blur-xl md:p-8 lg:p-10"
+          className="group relative mb-7 overflow-hidden rounded-[1.7rem] border border-orange-400/20 bg-black/55 p-5 shadow-[0_0_70px_rgba(255,122,0,0.10)] backdrop-blur-xl md:p-8 lg:mb-8 lg:rounded-[2.2rem] lg:p-10"
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(255,122,0,0.18),transparent_34%),radial-gradient(circle_at_78%_35%,rgba(138,92,246,0.16),transparent_30%),radial-gradient(circle_at_55%_80%,rgba(34,211,238,0.10),transparent_34%)]" />
           <div className="absolute -right-28 top-20 h-80 w-80 rounded-full bg-purple-600/15 blur-3xl transition duration-700 group-hover:bg-purple-500/20" />
           <div className="absolute -bottom-28 left-10 h-72 w-72 rounded-full bg-zam-orange/15 blur-3xl" />
 
-          <div className="relative grid gap-10 lg:grid-cols-[1.14fr_0.86fr] lg:items-center">
+          <div className="relative grid gap-8 lg:grid-cols-[1.14fr_0.86fr] lg:items-center lg:gap-10">
             <div className="order-2 lg:order-1">
-              <div className="relative min-h-[34rem] lg:min-h-[40rem]">
+              <div className="relative lg:min-h-[40rem]">
                 <div className="relative mx-auto max-w-4xl rounded-[1.7rem] border border-white/10 bg-[#070707] p-3 shadow-2xl">
-                  <div className="mb-3 flex items-center gap-2 px-2">
-                    <span className="h-3 w-3 rounded-full bg-red-500" />
-                    <span className="h-3 w-3 rounded-full bg-yellow-500" />
-                    <span className="h-3 w-3 rounded-full bg-green-500" />
-                    <span className="ml-3 text-xs text-zinc-500">
-                      lamesafamiliar.net
-                    </span>
-                  </div>
-
+                  <BrowserDots label="lamesafamiliar.net" />
                   <img
                     src="/showcase/lamesa/lamesa_salas.png"
                     alt="La Mesa Familiar sala multijugador"
-                    className="h-full w-full rounded-[1.25rem] border border-white/5 object-cover"
+                    className="w-full rounded-[1.25rem] border border-white/5 object-cover"
                   />
                 </div>
 
-                <div className="absolute bottom-3 left-2 max-w-[31rem] rounded-[1.25rem] border border-cyan-400/20 bg-black/75 p-3 shadow-[0_0_45px_rgba(34,211,238,0.12)] backdrop-blur-xl md:left-7 md:w-[47%]">
+                <div className="hidden md:absolute md:bottom-3 md:left-7 md:block md:w-[47%] md:max-w-[31rem] md:rounded-[1.25rem] md:border md:border-cyan-400/20 md:bg-black/75 md:p-3 md:shadow-[0_0_45px_rgba(34,211,238,0.12)] md:backdrop-blur-xl">
                   <div className="mb-3 flex items-center justify-between">
                     <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-cyan-300">
                       <Trophy className="h-4 w-4" />
@@ -363,8 +363,12 @@ export function Projects() {
                 <motion.div
                   initial={{ y: 0 }}
                   animate={{ y: [-7, 7, -7] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute bottom-0 right-2 w-[11rem] overflow-hidden rounded-[1.8rem] border border-white/10 bg-black p-2 shadow-[0_0_60px_rgba(255,122,0,0.18)] md:bottom-6 md:right-8 md:w-[13rem] lg:w-[15rem]"
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="hidden overflow-hidden rounded-[1.8rem] border border-white/10 bg-black p-2 shadow-[0_0_60px_rgba(255,122,0,0.18)] md:absolute md:bottom-6 md:right-8 md:block md:w-[13rem] lg:w-[15rem]"
                 >
                   <img
                     src="/showcase/lamesa/loteria_game.jpeg"
@@ -376,55 +380,30 @@ export function Projects() {
             </div>
 
             <div className="order-1 lg:order-2">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-zam-orange/25 bg-zam-orange/10 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-zam-orange">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-zam-orange/25 bg-zam-orange/10 px-4 py-2 text-[10px] font-black uppercase tracking-[0.22em] text-zam-orange sm:text-xs">
                 <Gamepad2 className="h-4 w-4" />
                 Plataforma propia
               </div>
 
-              <h3 className="font-heading text-4xl leading-tight text-white md:text-5xl">
+              <h3 className="font-heading text-3xl leading-tight text-white sm:text-4xl md:text-5xl">
                 La Mesa Familiar
               </h3>
 
-              <p className="mt-5 text-lg leading-8 text-zinc-300">
+              <p className="mt-5 text-sm leading-7 text-zinc-300 sm:text-lg sm:leading-8">
                 Plataforma web de juegos de mesa digitales para familias y
                 amigos, con salas online, perfiles, rankings, recompensas,
                 cosméticos y sincronización en tiempo real.
               </p>
 
-              <div className="mt-7 grid gap-3 sm:grid-cols-3">
-                {[
-                  { label: "Tipo", value: "SaaS / Gaming" },
-                  { label: "Modo", value: "Multiplayer" },
-                  { label: "Core", value: "Realtime" },
-                ].map((item) => (
-                  <div
-                    key={item.label}
-                    className="rounded-2xl border border-white/10 bg-black/35 p-4"
-                  >
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
-                      {item.label}
-                    </p>
-                    <p className="mt-2 text-sm font-black text-white">
-                      {item.value}
-                    </p>
-                  </div>
-                ))}
+              <div className="mt-6 grid gap-3 sm:grid-cols-3 lg:mt-7">
+                <StatPill label="Tipo" value="SaaS / Gaming" />
+                <StatPill label="Modo" value="Multiplayer" />
+                <StatPill label="Core" value="Realtime" />
               </div>
 
-              <div className="mt-8 space-y-3">
-                <p className="text-xs font-black uppercase tracking-[0.22em] text-zinc-500">
-                  Qué resolvimos
-                </p>
+              <HighlightsList items={lmfHighlights} />
 
-                {lmfHighlights.map((item) => (
-                  <div key={item} className="flex gap-3 text-sm text-zinc-300">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-zam-orange" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-2">
+              <div className="mt-7 flex flex-wrap gap-2 lg:mt-8">
                 {[
                   "Next.js",
                   "Supabase",
@@ -433,137 +412,123 @@ export function Projects() {
                   "Gaming",
                   "Profiles",
                 ].map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-white/10 bg-black/35 px-3 py-1 text-xs text-zinc-400"
-                  >
-                    {tag}
-                  </span>
+                  <Tag key={tag}>{tag}</Tag>
                 ))}
               </div>
 
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href="https://lamesafamiliar.net"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-3 rounded-full border border-zam-orange/40 bg-zam-orange/10 px-6 py-4 text-xs font-black uppercase tracking-[0.18em] text-zam-orange transition hover:bg-zam-orange hover:text-black hover:shadow-[0_0_34px_rgba(255,122,0,0.3)]"
-                >
-                  Ver proyecto
-                  <ArrowUpRight className="h-4 w-4" />
-                </a>
-
-                <a
-                  href="/#planes"
-                  className="inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-4 text-xs font-black uppercase tracking-[0.18em] text-black transition hover:bg-zam-orange"
-                >
-                  Ver planes
-                  <ArrowRight className="h-4 w-4" />
-                </a>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-9">
+                <PrimaryProjectButton href="https://lamesafamiliar.net" />
+                <PlansButton />
               </div>
             </div>
           </div>
         </motion.article>
 
-        <div className="grid gap-6 lg:grid-cols-1">
-          {compactProjects.map((project, index) => {
-            const Icon = project.icon;
+        {/* SANTIEL TV */}
+        <motion.article
+          initial={{ opacity: 0, y: 34 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65 }}
+          viewport={{ once: true }}
+          className="group relative mb-10 overflow-hidden rounded-[1.7rem] border border-yellow-400/20 bg-black/55 p-5 shadow-[0_0_70px_rgba(250,204,21,0.08)] backdrop-blur-xl md:p-8 lg:rounded-[2.2rem] lg:p-10"
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(250,204,21,0.18),transparent_34%),radial-gradient(circle_at_80%_35%,rgba(255,122,0,0.12),transparent_30%),radial-gradient(circle_at_60%_85%,rgba(255,255,255,0.05),transparent_34%)]" />
+          <div className="absolute -right-28 top-16 h-80 w-80 rounded-full bg-yellow-500/15 blur-3xl transition duration-700 group-hover:bg-yellow-400/20" />
+          <div className="absolute -bottom-28 left-10 h-72 w-72 rounded-full bg-zam-orange/10 blur-3xl" />
 
-            return (
-              <motion.article
-                key={project.name}
-                initial={{ opacity: 0, y: 34 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                viewport={{ once: true }}
-                className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-black/45 p-8 transition-all duration-500 hover:border-zam-orange/35 hover:shadow-[0_0_55px_rgba(255,122,0,0.12)]"
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${project.accent}`} />
-                <div className="absolute right-0 top-0 h-72 w-72 rounded-full bg-zam-orange/10 blur-3xl opacity-0 transition duration-500 group-hover:opacity-100" />
+          <div className="relative grid gap-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-center lg:gap-10">
+            <div>
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-yellow-400/25 bg-yellow-400/10 px-4 py-2 text-[10px] font-black uppercase tracking-[0.22em] text-yellow-400 sm:text-xs">
+                <Tv className="h-4 w-4" />
+                Landing + portal
+              </div>
 
-                <div className="relative grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-                  <div>
-                    <div className="mb-7 flex items-center justify-between gap-4">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-zam-orange/25 bg-zam-orange/10">
-                        <Icon className="h-7 w-7 text-zam-orange" />
-                      </div>
+              <h3 className="font-heading text-3xl leading-tight text-white sm:text-4xl md:text-5xl">
+                Santiel TV
+              </h3>
 
-                      <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-black text-zinc-300">
-                        {project.status}
-                      </span>
-                    </div>
+              <p className="mt-5 text-sm leading-7 text-zinc-300 sm:text-lg sm:leading-8">
+                Landing page premium para publicitar un negocio de streaming
+                digital, con portal de clientes, panel administrativo y
+                estructura comercial enfocada en conversión.
+              </p>
 
-                    <p className="mb-3 text-sm uppercase tracking-[0.2em] text-zam-orange">
-                      {project.type}
-                    </p>
+              <div className="mt-6 grid gap-3 sm:grid-cols-3 lg:mt-7">
+                <StatPill label="Objetivo" value="Conversión" />
+                <StatPill label="Sistema" value="Portal + Admin" />
+                <StatPill label="Marca" value="Premium" />
+              </div>
 
-                    <h3 className="mb-5 font-heading text-3xl text-white md:text-4xl">
-                      {project.name}
-                    </h3>
+              <HighlightsList items={santielHighlights} />
 
-                    <p className="text-base leading-8 text-zinc-400">
-                      {project.description}
-                    </p>
+              <div className="mt-7 flex flex-wrap gap-2 lg:mt-8">
+                {[
+                  "React",
+                  "Netlify",
+                  "Supabase",
+                  "Admin",
+                  "Portal",
+                  "Landing",
+                ].map((tag) => (
+                  <Tag key={tag}>{tag}</Tag>
+                ))}
+              </div>
+
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-9">
+                <PrimaryProjectButton href="https://santieltv.com" />
+                <PlansButton />
+              </div>
+            </div>
+
+            <div className="relative lg:min-h-[40rem]">
+              <div className="absolute -left-6 top-4 hidden h-40 w-40 rounded-full bg-yellow-500/15 blur-3xl md:block" />
+              <div className="absolute right-8 top-10 hidden h-52 w-52 rounded-full bg-yellow-400/15 blur-3xl md:block" />
+
+              <div className="relative mx-auto max-w-4xl rounded-[1.7rem] border border-white/10 bg-[#070707] p-3 shadow-2xl">
+                <BrowserDots label="santieltv.com" />
+                <img
+                  src="/showcase/santiel/santiel_home.png"
+                  alt="Santiel TV landing page"
+                  className="w-full rounded-[1.25rem] border border-white/5 object-cover"
+                />
+              </div>
+
+              <div className="hidden md:absolute md:bottom-4 md:left-8 md:block md:w-[54%] md:max-w-[34rem] md:rounded-[1.25rem] md:border md:border-yellow-400/20 md:bg-black/75 md:p-3 md:shadow-[0_0_45px_rgba(250,204,21,0.14)] md:backdrop-blur-xl">
+                <div className="mb-3 flex items-center justify-between">
+                  <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-yellow-400">
+                    <LayoutDashboard className="h-4 w-4" />
+                    Panel admin
                   </div>
-
-                  <div>
-                    <div className="mb-7 grid gap-3 sm:grid-cols-3">
-                      {project.metrics.map((metric) => (
-                        <div
-                          key={metric.label}
-                          className="rounded-2xl border border-white/10 bg-black/30 p-4"
-                        >
-                          <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
-                            {metric.label}
-                          </p>
-                          <p className="mt-2 text-sm font-black text-white">
-                            {metric.value}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="mb-7 space-y-3">
-                      <p className="text-xs font-black uppercase tracking-[0.2em] text-zinc-500">
-                        Qué resolvimos
-                      </p>
-                      {project.solved.map((item) => (
-                        <div
-                          key={item}
-                          className="flex gap-3 text-sm text-zinc-300"
-                        >
-                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-zam-orange" />
-                          <span>{item}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="mb-8 flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs text-zinc-400"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-3 rounded-full border border-zam-orange/30 bg-zam-orange/10 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-zam-orange transition hover:bg-zam-orange hover:text-black hover:shadow-[0_0_32px_rgba(255,122,0,0.25)]"
-                    >
-                      Ver proyecto
-                      <ArrowUpRight className="h-4 w-4" />
-                    </a>
-                  </div>
+                  <span className="rounded-full bg-yellow-400 px-2 py-1 text-[10px] font-black text-black">
+                    Control
+                  </span>
                 </div>
-              </motion.article>
-            );
-          })}
-        </div>
+                <img
+                  src="/showcase/santiel/santiel_paneladmin.png"
+                  alt="Santiel TV panel admin"
+                  className="rounded-xl border border-white/5 object-cover"
+                />
+              </div>
+
+              <motion.div
+                initial={{ y: 0 }}
+                animate={{ y: [-7, 7, -7] }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="hidden overflow-hidden rounded-[1.8rem] border border-white/10 bg-black p-2 shadow-[0_0_60px_rgba(250,204,21,0.18)] md:absolute md:bottom-6 md:right-8 md:block md:w-[13rem] lg:w-[15rem]"
+              >
+                <img
+                  src="/showcase/santiel/movil_planes.jpeg"
+                  alt="Santiel TV planes móvil"
+                  className="rounded-[1.35rem] object-cover"
+                />
+              </motion.div>
+            </div>
+          </div>
+        </motion.article>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}

@@ -129,22 +129,6 @@ export function Hero() {
             >
               <KaizenEmblem />
             </motion.div>
-
-            <motion.div
-              animate={{ opacity: [0.35, 1, 0.35] }}
-              transition={{
-                duration: 2.8,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute right-[8%] top-[26%] rounded border border-zam-orange/35 bg-black/55 px-3 py-1 text-[10px] font-bold tracking-[0.16em] text-zam-orange shadow-[0_0_20px_rgba(255,122,0,0.18)]"
-            >
-              SYS.ONLINE
-            </motion.div>
-
-            <div className="absolute bottom-[20%] left-[10%] rounded border border-white/10 bg-black/50 px-3 py-1 text-[10px] tracking-[0.14em] text-zam-silver/60">
-              KZN-CORE // v2.4.0
-            </div>
           </motion.div>
         </div>
       </section>
