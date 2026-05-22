@@ -11,7 +11,6 @@ import {
   Gamepad2,
   Globe,
   LayoutDashboard,
-  MonitorPlay,
   ShieldCheck,
   ShoppingCart,
   Sparkles,
@@ -176,6 +175,189 @@ function HighlightsList({ items }: { items: string[] }) {
   );
 }
 
+function MobileImageCard({
+  label,
+  src,
+  alt,
+  className = "aspect-[16/10]",
+  objectClassName = "object-cover object-top",
+}: {
+  label: string;
+  src: string;
+  alt: string;
+  className?: string;
+  objectClassName?: string;
+}) {
+  return (
+    <div className="rounded-[1.35rem] border border-white/10 bg-[#070707] p-2 shadow-[0_0_35px_rgba(255,122,0,0.10)]">
+      <p className="mb-2 px-1 text-[10px] font-black uppercase tracking-[0.18em] text-zinc-500">
+        {label}
+      </p>
+      <div
+        className={`overflow-hidden rounded-[1rem] border border-white/5 ${className}`}
+      >
+        <img
+          src={src}
+          alt={alt}
+          className={`h-full w-full ${objectClassName}`}
+        />
+      </div>
+    </div>
+  );
+}
+
+function MobileStackShowcase({
+  domain,
+  primarySrc,
+  primaryAlt,
+  secondaryLabel,
+  secondarySrc,
+  secondaryAlt,
+  mobileLabel,
+  mobileSrc,
+  mobileAlt,
+}: {
+  domain: string;
+  primarySrc: string;
+  primaryAlt: string;
+  secondaryLabel: string;
+  secondarySrc: string;
+  secondaryAlt: string;
+  mobileLabel: string;
+  mobileSrc: string;
+  mobileAlt: string;
+}) {
+  return (
+    <div className="mt-8 space-y-3 lg:hidden">
+      <div className="rounded-[1.55rem] border border-white/10 bg-[#070707] p-3 shadow-2xl">
+        <BrowserDots label={domain} />
+        <img
+          src={primarySrc}
+          alt={primaryAlt}
+          className="w-full rounded-[1.15rem] border border-white/5 object-cover object-top"
+        />
+      </div>
+
+      <div className="grid grid-cols-2 gap-3">
+        <MobileImageCard
+          label={secondaryLabel}
+          src={secondarySrc}
+          alt={secondaryAlt}
+          className="aspect-[4/3]"
+        />
+        <MobileImageCard
+          label={mobileLabel}
+          src={mobileSrc}
+          alt={mobileAlt}
+          className="aspect-[4/3]"
+        />
+      </div>
+    </div>
+  );
+}
+
+function DesktopShowcase({
+  domain,
+  primarySrc,
+  primaryAlt,
+  secondaryLabel,
+  secondaryBadge,
+  secondaryIcon,
+  secondarySrc,
+  secondaryAlt,
+  mobileSrc,
+  mobileAlt,
+  accent = "orange",
+}: {
+  domain: string;
+  primarySrc: string;
+  primaryAlt: string;
+  secondaryLabel: string;
+  secondaryBadge: string;
+  secondaryIcon: React.ReactNode;
+  secondarySrc: string;
+  secondaryAlt: string;
+  mobileSrc: string;
+  mobileAlt: string;
+  accent?: "orange" | "cyan" | "yellow";
+}) {
+  const accentClasses = {
+    orange: {
+      border: "md:border-zam-orange/20",
+      shadow: "md:shadow-[0_0_45px_rgba(255,122,0,0.18)]",
+      text: "text-zam-orange",
+      badge: "bg-zam-orange text-black",
+      phoneShadow: "shadow-[0_0_60px_rgba(255,90,0,0.22)]",
+    },
+    cyan: {
+      border: "md:border-cyan-400/20",
+      shadow: "md:shadow-[0_0_45px_rgba(34,211,238,0.12)]",
+      text: "text-cyan-300",
+      badge: "bg-cyan-300 text-black",
+      phoneShadow: "shadow-[0_0_60px_rgba(34,211,238,0.15)]",
+    },
+    yellow: {
+      border: "md:border-yellow-400/20",
+      shadow: "md:shadow-[0_0_45px_rgba(250,204,21,0.14)]",
+      text: "text-yellow-400",
+      badge: "bg-yellow-400 text-black",
+      phoneShadow: "shadow-[0_0_60px_rgba(250,204,21,0.18)]",
+    },
+  }[accent];
+
+  return (
+    <div className="relative hidden lg:block lg:min-h-[40rem]">
+      <div className="absolute -left-6 top-4 hidden h-40 w-40 rounded-full bg-zam-orange/15 blur-3xl md:block" />
+      <div className="absolute right-8 top-10 hidden h-52 w-52 rounded-full bg-white/10 blur-3xl md:block" />
+
+      <div className="relative mx-auto max-w-4xl rounded-[1.7rem] border border-white/10 bg-[#070707] p-3 shadow-2xl">
+        <BrowserDots label={domain} />
+        <img
+          src={primarySrc}
+          alt={primaryAlt}
+          className="w-full rounded-[1.25rem] border border-white/5 object-cover"
+        />
+      </div>
+
+      <div
+        className={`absolute bottom-4 left-8 w-[52%] max-w-[34rem] rounded-[1.25rem] border bg-black/75 p-3 backdrop-blur-xl ${accentClasses.border} ${accentClasses.shadow}`}
+      >
+        <div className="mb-3 flex items-center justify-between">
+          <div
+            className={`inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] ${accentClasses.text}`}
+          >
+            {secondaryIcon}
+            {secondaryLabel}
+          </div>
+          <span
+            className={`rounded-full px-2 py-1 text-[10px] font-black ${accentClasses.badge}`}
+          >
+            {secondaryBadge}
+          </span>
+        </div>
+        <img
+          src={secondarySrc}
+          alt={secondaryAlt}
+          className="rounded-xl border border-white/5 object-cover"
+        />
+      </div>
+
+      <motion.div
+        initial={{ y: 0 }}
+        animate={{ y: [-7, 7, -7] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        className={`absolute bottom-6 right-8 block w-[15rem] overflow-hidden rounded-[1.8rem] border border-white/10 bg-black p-2 ${accentClasses.phoneShadow}`}
+      >
+        <img
+          src={mobileSrc}
+          alt={mobileAlt}
+          className="rounded-[1.35rem] object-cover"
+        />
+      </motion.div>
+    </div>
+  );
+}
+
 export function Projects() {
   return (
     <section
@@ -267,55 +449,33 @@ export function Projects() {
                 <PrimaryProjectButton href="https://velasquezfoodtruck.com" />
                 <PlansButton />
               </div>
+
+              <MobileStackShowcase
+                domain="velasquezfoodtruck.com"
+                primarySrc="/showcase/velasquez/vft_home.png"
+                primaryAlt="Velázquez Food Truck landing page"
+                secondaryLabel="POS interno"
+                secondarySrc="/showcase/velasquez/vft_pos.png"
+                secondaryAlt="Velázquez POS interno"
+                mobileLabel="Móvil"
+                mobileSrc="/showcase/velasquez/movil_home.jpeg"
+                mobileAlt="Velázquez móvil"
+              />
             </div>
 
-            <div className="relative lg:min-h-[39rem]">
-              <div className="absolute -left-6 top-4 hidden h-40 w-40 rounded-full bg-red-600/20 blur-3xl md:block" />
-              <div className="absolute right-8 top-10 hidden h-52 w-52 rounded-full bg-zam-orange/20 blur-3xl md:block" />
-
-              <div className="relative mx-auto max-w-4xl rounded-[1.7rem] border border-white/10 bg-[#070707] p-3 shadow-2xl">
-                <BrowserDots label="velasquezfoodtruck.com" />
-                <img
-                  src="/showcase/velasquez/vft_home.png"
-                  alt="Velázquez Food Truck landing page"
-                  className="w-full rounded-[1.25rem] border border-white/5 object-cover"
-                />
-              </div>
-
-              <div className="hidden md:absolute md:bottom-4 md:left-8 md:block md:w-[45%] md:max-w-[30rem] md:rounded-[1.25rem] md:border md:border-zam-orange/20 md:bg-black/75 md:p-3 md:shadow-[0_0_45px_rgba(255,122,0,0.18)] md:backdrop-blur-xl">
-                <div className="mb-3 flex items-center justify-between">
-                  <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-zam-orange">
-                    <ShoppingCart className="h-4 w-4" />
-                    POS interno
-                  </div>
-                  <span className="rounded-full bg-zam-orange px-2 py-1 text-[10px] font-black text-black">
-                    Live
-                  </span>
-                </div>
-                <img
-                  src="/showcase/velasquez/vft_pos.png"
-                  alt="Velázquez POS interno"
-                  className="rounded-xl border border-white/5 object-cover"
-                />
-              </div>
-
-              <motion.div
-                initial={{ y: 0 }}
-                animate={{ y: [-7, 7, -7] }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="hidden overflow-hidden rounded-[1.8rem] border border-white/10 bg-black p-2 shadow-[0_0_60px_rgba(255,90,0,0.22)] md:absolute md:bottom-6 md:right-8 md:block md:w-[13rem] lg:w-[15rem]"
-              >
-                <img
-                  src="/showcase/velasquez/movil_home.jpeg"
-                  alt="Velázquez móvil"
-                  className="rounded-[1.35rem] object-cover"
-                />
-              </motion.div>
-            </div>
+            <DesktopShowcase
+              domain="velasquezfoodtruck.com"
+              primarySrc="/showcase/velasquez/vft_home.png"
+              primaryAlt="Velázquez Food Truck landing page"
+              secondaryLabel="POS interno"
+              secondaryBadge="Live"
+              secondaryIcon={<ShoppingCart className="h-4 w-4" />}
+              secondarySrc="/showcase/velasquez/vft_pos.png"
+              secondaryAlt="Velázquez POS interno"
+              mobileSrc="/showcase/velasquez/movil_home.jpeg"
+              mobileAlt="Velázquez móvil"
+              accent="orange"
+            />
           </div>
         </motion.article>
 
@@ -333,50 +493,19 @@ export function Projects() {
 
           <div className="relative grid gap-8 lg:grid-cols-[1.14fr_0.86fr] lg:items-center lg:gap-10">
             <div className="order-2 lg:order-1">
-              <div className="relative lg:min-h-[40rem]">
-                <div className="relative mx-auto max-w-4xl rounded-[1.7rem] border border-white/10 bg-[#070707] p-3 shadow-2xl">
-                  <BrowserDots label="lamesafamiliar.net" />
-                  <img
-                    src="/showcase/lamesa/lamesa_salas.png"
-                    alt="La Mesa Familiar sala multijugador"
-                    className="w-full rounded-[1.25rem] border border-white/5 object-cover"
-                  />
-                </div>
-
-                <div className="hidden md:absolute md:bottom-3 md:left-7 md:block md:w-[47%] md:max-w-[31rem] md:rounded-[1.25rem] md:border md:border-cyan-400/20 md:bg-black/75 md:p-3 md:shadow-[0_0_45px_rgba(34,211,238,0.12)] md:backdrop-blur-xl">
-                  <div className="mb-3 flex items-center justify-between">
-                    <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-cyan-300">
-                      <Trophy className="h-4 w-4" />
-                      Perfil + progreso
-                    </div>
-                    <span className="rounded-full bg-cyan-300 px-2 py-1 text-[10px] font-black text-black">
-                      Stats
-                    </span>
-                  </div>
-                  <img
-                    src="/showcase/lamesa/lamesa_perfil.png"
-                    alt="La Mesa Familiar perfil y progreso"
-                    className="rounded-xl border border-white/5 object-cover"
-                  />
-                </div>
-
-                <motion.div
-                  initial={{ y: 0 }}
-                  animate={{ y: [-7, 7, -7] }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="hidden overflow-hidden rounded-[1.8rem] border border-white/10 bg-black p-2 shadow-[0_0_60px_rgba(255,122,0,0.18)] md:absolute md:bottom-6 md:right-8 md:block md:w-[13rem] lg:w-[15rem]"
-                >
-                  <img
-                    src="/showcase/lamesa/loteria_game.jpeg"
-                    alt="La Mesa Familiar Lotería móvil"
-                    className="rounded-[1.35rem] object-cover"
-                  />
-                </motion.div>
-              </div>
+              <DesktopShowcase
+                domain="lamesafamiliar.net"
+                primarySrc="/showcase/lamesa/lamesa_salas.png"
+                primaryAlt="La Mesa Familiar sala multijugador"
+                secondaryLabel="Perfil + progreso"
+                secondaryBadge="Stats"
+                secondaryIcon={<Trophy className="h-4 w-4" />}
+                secondarySrc="/showcase/lamesa/lamesa_perfil.png"
+                secondaryAlt="La Mesa Familiar perfil y progreso"
+                mobileSrc="/showcase/lamesa/loteria_game.jpeg"
+                mobileAlt="La Mesa Familiar Lotería móvil"
+                accent="cyan"
+              />
             </div>
 
             <div className="order-1 lg:order-2">
@@ -420,6 +549,18 @@ export function Projects() {
                 <PrimaryProjectButton href="https://lamesafamiliar.net" />
                 <PlansButton />
               </div>
+
+              <MobileStackShowcase
+                domain="lamesafamiliar.net"
+                primarySrc="/showcase/lamesa/lamesa_salas.png"
+                primaryAlt="La Mesa Familiar sala multijugador"
+                secondaryLabel="Perfil"
+                secondarySrc="/showcase/lamesa/lamesa_perfil.png"
+                secondaryAlt="La Mesa Familiar perfil y progreso"
+                mobileLabel="Juego móvil"
+                mobileSrc="/showcase/lamesa/loteria_game.jpeg"
+                mobileAlt="La Mesa Familiar Lotería móvil"
+              />
             </div>
           </div>
         </motion.article>
@@ -478,55 +619,33 @@ export function Projects() {
                 <PrimaryProjectButton href="https://santieltv.com" />
                 <PlansButton />
               </div>
+
+              <MobileStackShowcase
+                domain="santieltv.com"
+                primarySrc="/showcase/santiel/santiel_home.png"
+                primaryAlt="Santiel TV landing page"
+                secondaryLabel="Admin"
+                secondarySrc="/showcase/santiel/santiel_paneladmin.png"
+                secondaryAlt="Santiel TV panel admin"
+                mobileLabel="Planes"
+                mobileSrc="/showcase/santiel/movil_planes.jpeg"
+                mobileAlt="Santiel TV planes móvil"
+              />
             </div>
 
-            <div className="relative lg:min-h-[40rem]">
-              <div className="absolute -left-6 top-4 hidden h-40 w-40 rounded-full bg-yellow-500/15 blur-3xl md:block" />
-              <div className="absolute right-8 top-10 hidden h-52 w-52 rounded-full bg-yellow-400/15 blur-3xl md:block" />
-
-              <div className="relative mx-auto max-w-4xl rounded-[1.7rem] border border-white/10 bg-[#070707] p-3 shadow-2xl">
-                <BrowserDots label="santieltv.com" />
-                <img
-                  src="/showcase/santiel/santiel_home.png"
-                  alt="Santiel TV landing page"
-                  className="w-full rounded-[1.25rem] border border-white/5 object-cover"
-                />
-              </div>
-
-              <div className="hidden md:absolute md:bottom-4 md:left-8 md:block md:w-[54%] md:max-w-[34rem] md:rounded-[1.25rem] md:border md:border-yellow-400/20 md:bg-black/75 md:p-3 md:shadow-[0_0_45px_rgba(250,204,21,0.14)] md:backdrop-blur-xl">
-                <div className="mb-3 flex items-center justify-between">
-                  <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-yellow-400">
-                    <LayoutDashboard className="h-4 w-4" />
-                    Panel admin
-                  </div>
-                  <span className="rounded-full bg-yellow-400 px-2 py-1 text-[10px] font-black text-black">
-                    Control
-                  </span>
-                </div>
-                <img
-                  src="/showcase/santiel/santiel_paneladmin.png"
-                  alt="Santiel TV panel admin"
-                  className="rounded-xl border border-white/5 object-cover"
-                />
-              </div>
-
-              <motion.div
-                initial={{ y: 0 }}
-                animate={{ y: [-7, 7, -7] }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="hidden overflow-hidden rounded-[1.8rem] border border-white/10 bg-black p-2 shadow-[0_0_60px_rgba(250,204,21,0.18)] md:absolute md:bottom-6 md:right-8 md:block md:w-[13rem] lg:w-[15rem]"
-              >
-                <img
-                  src="/showcase/santiel/movil_planes.jpeg"
-                  alt="Santiel TV planes móvil"
-                  className="rounded-[1.35rem] object-cover"
-                />
-              </motion.div>
-            </div>
+            <DesktopShowcase
+              domain="santieltv.com"
+              primarySrc="/showcase/santiel/santiel_home.png"
+              primaryAlt="Santiel TV landing page"
+              secondaryLabel="Panel admin"
+              secondaryBadge="Control"
+              secondaryIcon={<LayoutDashboard className="h-4 w-4" />}
+              secondarySrc="/showcase/santiel/santiel_paneladmin.png"
+              secondaryAlt="Santiel TV panel admin"
+              mobileSrc="/showcase/santiel/movil_planes.jpeg"
+              mobileAlt="Santiel TV planes móvil"
+              accent="yellow"
+            />
           </div>
         </motion.article>
 
