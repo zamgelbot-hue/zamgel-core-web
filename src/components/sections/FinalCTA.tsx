@@ -53,6 +53,13 @@ export function FinalCTA() {
               </button>
 
               <a
+                href="/planes"
+                className="group rounded-2xl border border-zam-orange/25 bg-zam-orange/10 px-10 py-5 text-zam-orange tracking-[0.15em] uppercase transition-all duration-500 hover:bg-zam-orange hover:text-black hover:shadow-[0_0_35px_rgba(255,122,0,0.25)]"
+              >
+                Ver paquetes
+              </a>
+
+              <a
                 href="#proyectos"
                 className="group rounded-2xl border border-white/10 bg-white/[0.03] px-10 py-5 text-white tracking-[0.15em] uppercase transition-all duration-500 hover:border-zam-orange/40 hover:bg-zam-orange/[0.04]"
               >
