@@ -7,9 +7,11 @@ import { TechStack } from "./components/sections/TechStack";
 import { Footer } from "./components/layout/Footer";
 import Services from "./components/sections/Services";
 import { Projects } from "./components/sections/Projects";
+import { PlansPreview } from "./components/sections/PlansPreview";
+import { HowWeWork } from "./components/sections/HowWeWork";
+import { BusinessTypes } from "./components/sections/BusinessTypes";
 import { About } from "./components/sections/About";
 import { FinalCTA } from "./components/sections/FinalCTA";
-import { PlansPreview } from "./components/sections/PlansPreview";
 import { Planes } from "./pages/Planes";
 
 export default function App() {
@@ -28,8 +30,10 @@ export default function App() {
         <StatsBar />
         <TechStack />
         <Services />
-        <PlansPreview />
         <Projects />
+        <PlansPreview />
+        <HowWeWork />
+        <BusinessTypes />
         <About />
         <FinalCTA />
       </main>

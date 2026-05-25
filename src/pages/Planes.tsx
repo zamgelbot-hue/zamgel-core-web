@@ -30,18 +30,71 @@ import { Footer } from "../components/layout/Footer";
 import { ParticleBackground } from "../components/visual/ParticleBackground";
 import { ContactModal } from "../components/ui/ContactModal";
 
+const starterPlans = [
+  {
+    name: "Web Inicial",
+    price: "$199",
+    tag: "Presencia básica",
+    icon: Globe,
+    description:
+      "Para negocios que solo necesitan una página sencilla, moderna y lista para recibir clientes desde internet.",
+    includes: [
+      "Landing page básica",
+      "Diseño responsive",
+      "Botón de WhatsApp",
+      "Redes sociales",
+      "Información del negocio",
+      "Optimización móvil básica",
+    ],
+  },
+  {
+    name: "Web Profesional",
+    price: "$299",
+    tag: "Página profesional",
+    icon: MonitorSmartphone,
+    featured: true,
+    description:
+      "Para negocios que quieren verse más profesionales con una página mejor estructurada y lista para promocionarse.",
+    includes: [
+      "Página profesional",
+      "Más secciones",
+      "Formulario de contacto",
+      "Google Maps",
+      "WhatsApp integrado",
+      "SEO básico",
+      "Animaciones ligeras",
+    ],
+  },
+  {
+    name: "Web Interactiva",
+    price: "$499",
+    tag: "Personalizada",
+    icon: Sparkles,
+    description:
+      "Para marcas que quieren una experiencia más visual, interactiva y personalizada para destacar mejor.",
+    includes: [
+      "Diseño personalizado",
+      "Secciones interactivas",
+      "Galerías premium",
+      "Perfiles o tarjetas dinámicas",
+      "Animaciones avanzadas",
+      "Experiencia visual más premium",
+    ],
+  },
+];
+
 const plans = [
   {
-    name: "PACK BÁSICO",
+    name: "Impulso Core",
     before: "$1200",
     offer: "$600",
-    tag: "Ideal para comenzar",
+    tag: "Presencia comercial",
     icon: Store,
     glow: "from-zinc-300/10 via-zam-orange/10 to-transparent",
     description:
-      "Para negocios que necesitan verse profesionales en internet, mostrar lo que venden y facilitar que el cliente los contacte.",
+      "Para negocios que necesitan una presencia profesional más completa, menú digital, QR y una base sólida para empezar bien.",
     simpleFor:
-      "Perfecto para food trucks, negocios pequeños, emprendimientos, servicios locales o negocios que todavía no tienen una página profesional.",
+      "Perfecto para food trucks, negocios pequeños, emprendimientos, servicios locales o negocios que todavía no tienen una presencia digital profesional.",
     includes: [
       "Landing page profesional",
       "Menú digital",
@@ -78,7 +131,7 @@ const plans = [
     ],
   },
   {
-    name: "PACK AVANZADO",
+    name: "Negocio Core",
     before: "$2500",
     offer: "$1200",
     tag: "Más vendido",
@@ -90,7 +143,7 @@ const plans = [
     simpleFor:
       "Ideal para food trucks, restaurantes, tiendas, negocios con menú, negocios que reciben pedidos o que quieren empezar a organizar ventas.",
     includes: [
-      "Todo lo del básico",
+      "Todo lo de Impulso Core",
       "Panel administrativo",
       "Sistema POS",
       "Gestión de productos",
@@ -126,9 +179,9 @@ const plans = [
     ],
   },
   {
-    name: "PACK PREMIUM",
-    before: "$3500+",
-    offer: "$1800+",
+    name: "Élite Core",
+    before: "$3500",
+    offer: "$1800",
     tag: "Sistema completo",
     icon: Crown,
     glow: "from-yellow-500/20 via-zam-orange/10 to-transparent",
@@ -137,7 +190,7 @@ const plans = [
     simpleFor:
       "Pensado para negocios que quieren crecer, profesionalizar su operación, manejar empleados, clientes frecuentes y procesos más avanzados.",
     includes: [
-      "Todo lo anterior",
+      "Todo lo de Negocio Core",
       "Sistema totalmente personalizado",
       "Loyalty / recompensas",
       "Kaizen AI / chatbot IA",
@@ -242,7 +295,7 @@ export function Planes() {
       <Navbar />
 
       <main>
-        <section className="relative min-h-screen overflow-hidden pt-36 pb-20">
+        <section className="relative overflow-hidden pt-36 pb-20">
           <ParticleBackground />
 
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,122,0,0.28),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(192,192,195,0.12),transparent_35%)]" />
@@ -268,8 +321,8 @@ export function Planes() {
               </h1>
 
               <p className="mt-7 max-w-2xl text-lg leading-8 text-zam-silver/80 md:text-xl">
-                Sistemas web modernos, POS, inventario, lealtad, branding y
-                automatización para negocios locales.
+                Desde páginas web accesibles hasta sistemas completos con POS,
+                inventario, lealtad, automatización e IA.
               </p>
 
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -290,7 +343,7 @@ export function Planes() {
               </div>
 
               <div className="mt-12 grid max-w-3xl gap-4 sm:grid-cols-3">
-                {["Web premium", "POS moderno", "Automatización"].map(
+                {["Páginas starter", "Web premium", "Sistemas reales"].map(
                   (item) => (
                     <div
                       key={item}
@@ -310,14 +363,106 @@ export function Planes() {
           <div className="mx-auto max-w-7xl">
             <div className="mb-14 text-center">
               <p className="text-xs font-bold uppercase tracking-[0.35em] text-zam-orange">
-                Paquetes premium
+                Planes starter
               </p>
               <h2 className="mt-4 font-heading text-4xl font-black text-white md:text-5xl">
-                Soluciones para cada etapa
+                Entrada económica para comenzar online
               </h2>
               <p className="mx-auto mt-5 max-w-2xl text-zam-silver/70">
-                Cada plan está pensado para que el cliente entienda exactamente
-                qué recibe y cómo eso ayuda a su negocio.
+                Opciones accesibles para negocios que necesitan una página
+                rápida, moderna y lista para promocionarse.
+              </p>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-3">
+              {starterPlans.map((plan, index) => {
+                const Icon = plan.icon;
+
+                return (
+                  <motion.div
+                    key={plan.name}
+                    initial={{ opacity: 0, y: 32 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className={`relative overflow-hidden rounded-[2rem] border ${
+                      plan.featured
+                        ? "border-zam-orange/60 bg-zam-orange/[0.08] shadow-[0_0_45px_rgba(255,122,0,0.2)]"
+                        : "border-white/10 bg-white/[0.03]"
+                    } p-7 backdrop-blur-xl`}
+                  >
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,122,0,0.18),transparent_38%)]" />
+
+                    <div className="relative">
+                      <div className="mb-6 flex items-center justify-between">
+                        <div className="rounded-2xl border border-white/10 bg-black/35 p-3">
+                          <Icon className="h-7 w-7 text-zam-orange" />
+                        </div>
+
+                        <span className="rounded-full border border-zam-orange/30 bg-zam-orange/10 px-3 py-1 text-xs font-bold text-zam-orange">
+                          {plan.tag}
+                        </span>
+                      </div>
+
+                      <h3 className="font-heading text-2xl font-black text-white">
+                        {plan.name}
+                      </h3>
+
+                      <p className="mt-4 text-sm leading-7 text-zam-silver/70">
+                        {plan.description}
+                      </p>
+
+                      <div className="mt-6">
+                        <p className="text-sm text-zam-orange">Desde</p>
+                        <p className="mt-1 text-4xl font-black text-white">
+                          {plan.price}{" "}
+                          <span className="text-base text-zam-silver/60">
+                            USD
+                          </span>
+                        </p>
+                      </div>
+
+                      <div className="mt-8 space-y-3">
+                        {plan.includes.map((item) => (
+                          <div key={item} className="flex gap-3 text-sm">
+                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-zam-orange" />
+                            <span className="text-zam-silver/85">{item}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setIsContactOpen(true)}
+                        className="mt-9 flex w-full items-center justify-center rounded-full border border-white/10 bg-white py-4 text-xs font-black tracking-[0.18em] text-black transition hover:bg-zam-orange hover:shadow-[0_0_30px_rgba(255,122,0,0.35)]"
+                      >
+                        SOLICITAR PLAN
+                      </button>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            <p className="mt-8 text-center text-xs uppercase tracking-[0.25em] text-zam-silver/40">
+              Los planes starter no incluyen sistemas, paneles administrativos,
+              pagos, login ni backend personalizado.
+            </p>
+          </div>
+        </section>
+
+        <section className="px-6 py-24">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-14 text-center">
+              <p className="text-xs font-bold uppercase tracking-[0.35em] text-zam-orange">
+                Soluciones premium
+              </p>
+              <h2 className="mt-4 font-heading text-4xl font-black text-white md:text-5xl">
+                Sistemas para negocios que quieren crecer
+              </h2>
+              <p className="mx-auto mt-5 max-w-2xl text-zam-silver/70">
+                Paquetes más completos para negocios que necesitan operación,
+                control, automatización y herramientas reales.
               </p>
             </div>
 
@@ -363,10 +508,10 @@ export function Planes() {
 
                       <div className="mt-5">
                         <p className="text-sm text-zam-silver/40 line-through">
-                          Antes: {plan.before}
+                          Antes: {plan.before} USD
                         </p>
                         <p className="mt-1 text-4xl font-black text-white">
-                          {plan.offer}
+                          Desde {plan.offer} USD
                         </p>
                         <p className="mt-1 text-sm text-zam-orange">
                           + mantenimiento mensual
@@ -391,17 +536,23 @@ export function Planes() {
                         ))}
                       </div>
 
-                      <a
-                        href="#contacto"
+                      <button
+                        type="button"
+                        onClick={() => setIsContactOpen(true)}
                         className="mt-9 flex w-full items-center justify-center rounded-full border border-white/10 bg-white py-4 text-xs font-black tracking-[0.18em] text-black transition hover:bg-zam-orange hover:shadow-[0_0_30px_rgba(255,122,0,0.35)]"
                       >
-                        SOLICITAR PACK
-                      </a>
+                        SOLICITAR SOLUCIÓN
+                      </button>
                     </div>
                   </motion.div>
                 );
               })}
             </div>
+
+            <p className="mt-8 text-center text-xs uppercase tracking-[0.25em] text-zam-silver/40">
+              Todos los precios están expresados en USD. El alcance final puede
+              variar según necesidades del negocio.
+            </p>
           </div>
         </section>
 
@@ -413,7 +564,7 @@ export function Planes() {
               </p>
 
               <h2 className="mt-4 font-heading text-4xl font-black text-white md:text-5xl">
-                ¿Qué significa cada cosa?
+                ¿Qué significa cada solución premium?
               </h2>
 
               <p className="mx-auto mt-5 max-w-3xl text-zam-silver/70">
@@ -624,8 +775,9 @@ export function Planes() {
             </h2>
 
             <p className="mx-auto mt-5 max-w-2xl text-zam-silver/70">
-              Zamgel Core crea sistemas premium para negocios locales que
-              quieren verse modernos, vender mejor y operar con más control.
+              Zamgel Core crea páginas, sistemas y soluciones premium para
+              negocios locales que quieren verse modernos, vender mejor y operar
+              con más control.
             </p>
 
             <button
@@ -633,7 +785,7 @@ export function Planes() {
               onClick={() => setIsContactOpen(true)}
               className="mt-9 inline-flex items-center gap-3 rounded-full bg-zam-orange px-8 py-4 text-sm font-black tracking-[0.16em] text-black transition hover:scale-[1.02] hover:bg-zam-glow hover:shadow-[0_0_35px_rgba(255,122,0,0.28)]"
             >
-              EMPEZAR MI SISTEMA
+              EMPEZAR MI PROYECTO
               <Rocket className="h-4 w-4" />
             </button>
           </div>
