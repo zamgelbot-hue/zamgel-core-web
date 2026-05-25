@@ -385,7 +385,7 @@ export function Planes() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className={`relative overflow-hidden rounded-[2rem] border ${
+                    className={`group relative overflow-hidden rounded-[2rem] border transition-all duration-300 ${
                       plan.featured
                         ? "border-zam-orange/60 bg-zam-orange/[0.08] shadow-[0_0_45px_rgba(255,122,0,0.2)]"
                         : "border-white/10 bg-white/[0.03]"
@@ -434,7 +434,7 @@ export function Planes() {
                       <button
                         type="button"
                         onClick={() => setIsContactOpen(true)}
-                        className="mt-9 flex w-full items-center justify-center rounded-full border border-white/10 bg-white py-4 text-xs font-black tracking-[0.18em] text-black transition hover:bg-zam-orange hover:shadow-[0_0_30px_rgba(255,122,0,0.35)]"
+                        className="relative mt-9 flex w-full items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white py-4 text-xs font-black tracking-[0.18em] text-black transition hover:bg-zam-orange hover:shadow-[0_0_30px_rgba(255,122,0,0.35)]"
                       >
                         SOLICITAR PLAN
                       </button>
@@ -477,7 +477,7 @@ export function Planes() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.12 }}
-                    className={`relative overflow-hidden rounded-[2rem] border ${
+                    className={`group relative overflow-hidden rounded-[2rem] border transition-all duration-300 ${
                       plan.featured
                         ? "border-zam-orange/60 shadow-[0_0_55px_rgba(255,122,0,0.25)]"
                         : "border-white/10"
@@ -489,8 +489,8 @@ export function Planes() {
 
                     <div className="relative">
                       <div className="mb-6 flex items-center justify-between">
-                        <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-                          <Icon className="h-7 w-7 text-zam-orange" />
+                        <div className="rounded-2xl border border-white/10 bg-white/5 p-3 transition duration-300 group-hover:scale-110 group-hover:border-zam-orange/40 group-hover:shadow-[0_0_25px_rgba(255,122,0,0.25)]">
+                          <Icon className="h-7 w-7 text-zam-orange transition duration-300 group-hover:rotate-6" />
                         </div>
 
                         <span className="rounded-full border border-zam-orange/30 bg-zam-orange/10 px-3 py-1 text-xs font-bold text-zam-orange">
@@ -539,7 +539,7 @@ export function Planes() {
                       <button
                         type="button"
                         onClick={() => setIsContactOpen(true)}
-                        className="mt-9 flex w-full items-center justify-center rounded-full border border-white/10 bg-white py-4 text-xs font-black tracking-[0.18em] text-black transition hover:bg-zam-orange hover:shadow-[0_0_30px_rgba(255,122,0,0.35)]"
+                        className="relative mt-9 flex w-full items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white py-4 text-xs font-black tracking-[0.18em] text-black transition hover:bg-zam-orange hover:shadow-[0_0_30px_rgba(255,122,0,0.35)]"
                       >
                         SOLICITAR SOLUCIÓN
                       </button>
@@ -583,8 +583,17 @@ export function Planes() {
                     key={plan.name}
                     initial={{ opacity: 0, y: 28 }}
                     whileInView={{ opacity: 1, y: 0 }}
+                    whileHover={{
+                      y: -8,
+                      scale: 1.015,
+                      transition: {
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 20,
+                      },
+                    }}
                     viewport={{ once: true }}
-                    className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-7 md:p-8"
+                    className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-7 md:p-8 transition-all duration-300"
                   >
                     <div
                       className={`absolute inset-0 bg-gradient-to-br ${plan.glow} opacity-60`}
