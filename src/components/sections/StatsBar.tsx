@@ -6,12 +6,12 @@ import { Rocket, Users, Code2, Shield, Globe } from "lucide-react";
 const stats = [
   {
     icon: Rocket,
-    value: "4",
+    value: "5",
     label: "Proyectos reales",
   },
   {
     icon: Users,
-    value: "3",
+    value: "4",
     label: "Clientes activos",
   },
   {

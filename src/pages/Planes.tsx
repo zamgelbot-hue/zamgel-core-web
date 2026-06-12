@@ -87,7 +87,7 @@ const plans = [
   {
     name: "Impulso Core",
     before: "$1200",
-    offer: "$600",
+    offer: "$699",
     tag: "Presencia comercial",
     icon: Store,
     glow: "from-zinc-300/10 via-zam-orange/10 to-transparent",
@@ -103,7 +103,7 @@ const plans = [
       "Galería de imágenes",
       "Diseño responsive",
       "Hosting en Vercel",
-      "Dominio personalizado",
+      "Dominio personalizado (1 año incluido, sujeto a disponibilidad de ZC)",
       "Branding básico",
       "Optimización móvil",
     ],
@@ -133,7 +133,7 @@ const plans = [
   {
     name: "Negocio Core",
     before: "$2500",
-    offer: "$1200",
+    offer: "$1299",
     tag: "Más vendido",
     icon: LayoutDashboard,
     featured: true,
@@ -181,7 +181,7 @@ const plans = [
   {
     name: "Élite Core",
     before: "$3500",
-    offer: "$1800",
+    offer: "$1799",
     tag: "Sistema completo",
     icon: Crown,
     glow: "from-yellow-500/20 via-zam-orange/10 to-transparent",
@@ -414,12 +414,24 @@ export function Planes() {
 
                       <div className="mt-6">
                         <p className="text-sm text-zam-orange">Desde</p>
+
                         <p className="mt-1 text-4xl font-black text-white">
                           {plan.price}{" "}
                           <span className="text-base text-zam-silver/60">
                             USD
                           </span>
                         </p>
+
+                        <div className="mt-2 space-y-1 text-sm font-medium text-zam-orange">
+                          <p>
+                            + Dominio (el costo varía según los años
+                            contratados)
+                          </p>
+
+                          {plan.name !== "Web Inicial" && (
+                            <p>+ Mantenimiento básico mensual</p>
+                          )}
+                        </div>
                       </div>
 
                       <div className="mt-8 space-y-3">
@@ -514,7 +526,7 @@ export function Planes() {
                           Desde {plan.offer} USD
                         </p>
                         <p className="mt-1 text-sm text-zam-orange">
-                          + mantenimiento mensual
+                          + mantenimiento premium mensual
                         </p>
                       </div>
 

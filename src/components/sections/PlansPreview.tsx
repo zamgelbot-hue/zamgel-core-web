@@ -39,7 +39,7 @@ const starterPlans = [
 const premiumPlans = [
   {
     name: "Impulso Core",
-    price: "$600 USD",
+    price: "$699 USD",
     before: "$1200 USD",
     description:
       "Página profesional, menú digital, QR, WhatsApp y presencia moderna para empezar bien.",
@@ -47,7 +47,7 @@ const premiumPlans = [
   },
   {
     name: "Negocio Core",
-    price: "$1200 USD",
+    price: "$1299 USD",
     before: "$2500 USD",
     description:
       "Panel administrativo, POS, productos, pedidos, inventario básico y dashboard.",
@@ -56,7 +56,7 @@ const premiumPlans = [
   },
   {
     name: "Élite Core",
-    price: "$1800 USD",
+    price: "$1799 USD",
     before: "$3500 USD",
     description:
       "Sistema personalizado con loyalty, Kaizen AI, automatizaciones, pagos y escalabilidad.",
@@ -245,7 +245,7 @@ export function PlansPreview() {
                         Desde {plan.price}
                       </p>
                       <p className="mt-1 text-sm text-zam-orange">
-                        + mantenimiento mensual
+                        + mantenimiento premium mensual
                       </p>
                     </div>
 
