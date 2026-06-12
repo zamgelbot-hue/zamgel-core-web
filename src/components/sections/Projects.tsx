@@ -46,6 +46,15 @@ const santielHighlights = [
   "Base preparada para ecosistema web + apps",
 ];
 
+const txsHighlights = [
+  "Portal público premium para academia y eventos",
+  "Dashboard administrativo con métricas operativas",
+  "Control de alumnos, grupos, pagos y membresías",
+  "Seguimiento de asistencia, evaluaciones y reportes",
+  "Gestión de vencimientos y próximos pagos",
+  "Base preparada para TXS Social y módulos futuros",
+];
+
 const capabilities = [
   {
     icon: Globe,
@@ -571,7 +580,7 @@ export function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65 }}
           viewport={{ once: true }}
-          className="group relative mb-10 overflow-hidden rounded-[1.7rem] border border-yellow-400/20 bg-black/55 p-5 shadow-[0_0_70px_rgba(250,204,21,0.08)] backdrop-blur-xl md:p-8 lg:rounded-[2.2rem] lg:p-10"
+          className="group relative mb-7 overflow-hidden rounded-[1.7rem] border border-yellow-400/20 bg-black/55 p-5 shadow-[0_0_70px_rgba(250,204,21,0.08)] backdrop-blur-xl md:p-8 lg:mb-8 lg:rounded-[2.2rem] lg:p-10"
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(250,204,21,0.18),transparent_34%),radial-gradient(circle_at_80%_35%,rgba(255,122,0,0.12),transparent_30%),radial-gradient(circle_at_60%_85%,rgba(255,255,255,0.05),transparent_34%)]" />
           <div className="absolute -right-28 top-16 h-80 w-80 rounded-full bg-yellow-500/15 blur-3xl transition duration-700 group-hover:bg-yellow-400/20" />
@@ -646,6 +655,92 @@ export function Projects() {
               mobileAlt="Santiel TV planes móvil"
               accent="yellow"
             />
+          </div>
+        </motion.article>
+
+        {/* TXS HUB */}
+        <motion.article
+          initial={{ opacity: 0, y: 34 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65 }}
+          viewport={{ once: true }}
+          className="group relative mb-10 overflow-hidden rounded-[1.7rem] border border-yellow-300/20 bg-black/55 p-5 shadow-[0_0_70px_rgba(234,179,8,0.08)] backdrop-blur-xl md:p-8 lg:rounded-[2.2rem] lg:p-10"
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(234,179,8,0.18),transparent_34%),radial-gradient(circle_at_82%_36%,rgba(255,255,255,0.07),transparent_30%),radial-gradient(circle_at_58%_84%,rgba(250,204,21,0.08),transparent_34%)]" />
+          <div className="absolute -right-28 top-16 h-80 w-80 rounded-full bg-yellow-500/15 blur-3xl transition duration-700 group-hover:bg-yellow-400/20" />
+          <div className="absolute -bottom-28 left-10 h-72 w-72 rounded-full bg-zam-orange/10 blur-3xl" />
+
+          <div className="relative grid gap-8 lg:grid-cols-[1.14fr_0.86fr] lg:items-center lg:gap-10">
+            <div className="order-2 lg:order-1">
+              <DesktopShowcase
+                domain="txshub.com"
+                primarySrc="/showcase/txs/txs_home.png"
+                primaryAlt="TXS Hub portal público"
+                secondaryLabel="Dashboard admin"
+                secondaryBadge="ERP"
+                secondaryIcon={<LayoutDashboard className="h-4 w-4" />}
+                secondarySrc="/showcase/txs/txs_admin.png"
+                secondaryAlt="TXS Hub dashboard administrativo"
+                mobileSrc="/showcase/txs/txs_mobile.png"
+                mobileAlt="TXS Hub móvil"
+                accent="yellow"
+              />
+            </div>
+
+            <div className="order-1 lg:order-2">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-yellow-400/25 bg-yellow-400/10 px-4 py-2 text-[10px] font-black uppercase tracking-[0.22em] text-yellow-400 sm:text-xs">
+                <Trophy className="h-4 w-4" />
+                Academia + ERP
+              </div>
+
+              <h3 className="font-heading text-3xl leading-tight text-white sm:text-4xl md:text-5xl">
+                TXS Hub
+              </h3>
+
+              <p className="mt-5 text-sm leading-7 text-zinc-300 sm:text-lg sm:leading-8">
+                Plataforma integral para academia de baile y eventos con portal
+                público, panel administrativo, control de alumnos, pagos,
+                asistencia y gestión operativa en tiempo real.
+              </p>
+
+              <div className="mt-6 grid gap-3 sm:grid-cols-3 lg:mt-7">
+                <StatPill label="Objetivo" value="Academia digital" />
+                <StatPill label="Sistema" value="Portal + Admin" />
+                <StatPill label="Sector" value="Educación" />
+              </div>
+
+              <HighlightsList items={txsHighlights} />
+
+              <div className="mt-7 flex flex-wrap gap-2 lg:mt-8">
+                {[
+                  "React",
+                  "Supabase",
+                  "ERP",
+                  "Dashboard",
+                  "Academia",
+                  "Eventos",
+                ].map((tag) => (
+                  <Tag key={tag}>{tag}</Tag>
+                ))}
+              </div>
+
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-9">
+                <PrimaryProjectButton href="https://txshub.com" />
+                <PlansButton />
+              </div>
+
+              <MobileStackShowcase
+                domain="txshub.com"
+                primarySrc="/showcase/txs/txs_home.png"
+                primaryAlt="TXS Hub portal público"
+                secondaryLabel="Admin"
+                secondarySrc="/showcase/txs/txs_admin.png"
+                secondaryAlt="TXS Hub dashboard administrativo"
+                mobileLabel="Móvil"
+                mobileSrc="/showcase/txs/txs_mobile.png"
+                mobileAlt="TXS Hub móvil"
+              />
+            </div>
           </div>
         </motion.article>
 
