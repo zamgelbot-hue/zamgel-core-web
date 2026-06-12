@@ -262,6 +262,13 @@ const realProjects = [
     description:
       "Página tipo landing page para publicitar un negocio de streaming digital, con diseño premium, enfoque comercial, soporte, planes, compatibilidad, sistema de clientes y base administrativa.",
   },
+  {
+    title: "TXS Hub",
+    url: "https://txshub.com",
+    label: "Academia / ERP operativo",
+    description:
+      "Plataforma integral para academia de baile y eventos con portal público, panel administrativo, control de alumnos, pagos, membresías, vencimientos, asistencia, reportes y una base preparada para seguir creciendo con módulos sociales y operativos.",
+  },
 ];
 
 const businessExamples = [
